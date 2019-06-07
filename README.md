@@ -5,6 +5,9 @@
 - Redis Caching for Faster Response Time(WIP)
 - Improving Site GUI(WIP)
 
+## Open Issues:
+- Date-Picker Issues with Safari/IE/Firefox
+
 ## Requires:
 - Pandas
 - Flask
