@@ -22,6 +22,8 @@
 <form action="/bse_bhav" method="POST" id='date_form'>
   Date: <input type="date" name="bhav_date">
   <input type="submit" id="bhav_form_submit">
+  <br>
+  <img src='/static/loader.gif' id='desc_img' style='display:none'>
 </form>
 <hr>
 <table id="bhav_table" class="display" style="width:100%">
@@ -54,6 +56,7 @@
 <script type="text/javascript">
 $(function() {
     $('#bhav_form_submit').click(function() {
+    	$('#desc_img').show();
         $.ajax({
             url: '/bse_bhav',
             data: $('#date_form').serialize(),
@@ -77,7 +80,10 @@ $(function() {
             	alert("Unexpected Error");
                 console.log(error);
             }
-        });
+        }).done(function(data){
+        		$('#desc_img').hide();
+	        }
+        );
         event.preventDefault();
     });
 });
