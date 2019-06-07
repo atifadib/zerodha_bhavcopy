@@ -4,6 +4,7 @@
 - Search for Equity by Name
 - Redis Caching for Faster Response Time(WIP)
 - Improving Site GUI(WIP)
+- Add File Exporting Feature(WIP)
 
 ## Open Issues:
 - Date-Picker Issues with Safari/IE/Firefox
