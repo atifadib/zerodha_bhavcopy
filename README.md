@@ -13,4 +13,7 @@
 - Pandas
 - Flask
 
+# HOSTED @ https://calm-temple-19999.herokuapp.com/
+# FOR ANY ISSUES: atif.adib25@gmail.com
+
 Parse and Present Bhavcopy published by BSE, Keep one week history and move older dates to glacier.
