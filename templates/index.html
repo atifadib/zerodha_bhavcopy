@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+	<head> 
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+          
+        <title> 
+            Zerodha BhavCopy Repo
+        </title> 
+  
+        
+        <link rel = "icon" href =  "https://media.glassdoor.com/sqll/823908/zerodha-squarelogo-1516198204536.png"
+        type = "image/x-icon">
+        <!--<link rel = "stylesheet" href="/static/zerodha.css">-->
+        <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
+        <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+    </head> 
+<body>
+<h1 align="center">ZERODHA BHAVCOPY REPOSITORY</h1>
+<br>
+<h4> Select Date to view BhavCopy </h4>
+<form action="/bse_bhav" method="POST" id='date_form'>
+  Date: <input type="date" name="bhav_date">
+  <input type="submit" id="bhav_form_submit">
+</form>
+<hr>
+<table id="bhav_table" class="display" style="width:100%">
+	<thead>
+		<tr>
+			<th>SC_CODE</th>
+			<th>SC_NAME</th>
+			<th>SC_GROUP</th>
+			<th>SC_TYPE</th>
+			<th>OPEN</th>
+			<th>HIGH</th>
+			<th>LOW</th>
+			<th>CLOSE</th>
+			<th>LAST</th>
+			<th>PREVCLOSE</th>
+			<th>NO_TRADES</th>
+			<th>NO_OF_SHRS</th>
+			<th>NET_TURNOV</th>
+			<th>TDCLOINDI</th>
+		</tr>
+	</thead>
+<table>
+</body>
+<script type="text/javascript">
+	$(document).ready(function() {
+    $('#bhav_table').DataTable();
+} );
+</script>
+
+<script type="text/javascript">
+$(function() {
+    $('#bhav_form_submit').click(function() {
+        $.ajax({
+            url: '/bse_bhav',
+            data: $('#date_form').serialize(),
+            type: 'POST',
+            success: function(response) {
+            	if(response.status == 'OK'){
+            		var bhav_table = $('#bhav_table').DataTable();
+            		bhav_table.clear();
+            		var table_data = response.data
+            		for(var idx=0;idx<table_data.length;idx++){
+            			row = [table_data[idx].SC_CODE,table_data[idx].SC_NAME,table_data[idx].SC_GROUP,table_data[idx].SC_TYPE,table_data[idx].OPEN,table_data[idx].HIGH,table_data[idx].LOW,table_data[idx].CLOSE,table_data[idx].LAST,table_data[idx].PREVCLOSE,table_data[idx].NO_TRADES,table_data[idx].NO_OF_SHRS,table_data[idx].NET_TURNOV,table_data[idx].TDCLOINDI]
+            			bhav_table.row.add(row);
+            		}
+            		bhav_table.draw(false);
+            	}
+            	else{
+            		alert(response.status);
+            	}
+            },
+            error: function(error) {
+            	alert("Unexpected Error");
+                console.log(error);
+            }
+        });
+        event.preventDefault();
+    });
+});
+</script>
+</html>
